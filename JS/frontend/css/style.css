@@ -1,0 +1,261 @@
+/* Общие стили */
+:root {
+  --primary-color: #0d6efd;
+  --success-color: #198754;
+  --warning-color: #ffc107;
+  --danger-color: #dc3545;
+  --light-gray: #f8f9fa;
+  --border-radius: 8px;
+  --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+
+body {
+  padding-bottom: 40px;
+  background-color: var(--light-gray);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Карточки */
+.card {
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  transition: var(--transition);
+  border: 1px solid #dee2e6;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Задачи */
+.task-card {
+  margin-bottom: 1rem;
+  transition: var(--transition);
+}
+
+.task-card.completed {
+  opacity: 0.8;
+  background-color: #f8f9fa;
+}
+
+.task-card.completed .task-title {
+  text-decoration: line-through;
+  color: #6c757d;
+}
+
+.task-title {
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+}
+
+.task-notes {
+  font-size: 0.9rem;
+  color: #6c757d;
+  white-space: pre-wrap;
+  line-height: 1.4;
+  margin-bottom: 0.5rem;
+}
+
+.task-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* Чекбоксы */
+.form-check-input {
+  transform: scale(1.2);
+  margin-top: 0.25rem;
+}
+
+.form-check-input:checked {
+  background-color: var(--success-color);
+  border-color: var(--success-color);
+}
+
+/* Кнопки */
+.btn {
+  border-radius: var(--border-radius);
+  font-weight: 500;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn-sm {
+  font-size: 0.875rem;
+  padding: 0.25rem 0.75rem;
+}
+
+/* Формы */
+.form-control, .form-select {
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+/* Навигация */
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.nav-link {
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.nav-link:hover {
+  transform: translateY(-1px);
+}
+
+/* Статистика */
+#stats-row .card {
+  transition: var(--transition);
+}
+
+#stats-row .card:hover {
+  transform: scale(1.02);
+}
+
+/* Форма редактирования */
+#edit-card {
+  border-left: 4px solid var(--warning-color) !important;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Анимации */
+.fade-in {
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.slide-up {
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Лоадер */
+.spinner-border {
+  width: 2rem;
+  height: 2rem;
+}
+
+/* Отзывчивость */
+@media (max-width: 768px) {
+  .task-actions {
+    flex-direction: column;
+  }
+  
+  .task-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .btn-group-vertical .btn {
+    margin-bottom: 0.25rem;
+  }
+  
+  .navbar-brand {
+    font-size: 1.1rem;
+  }
+  
+  .display-4 {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  
+  .card-body {
+    padding: 1rem;
+  }
+  
+  .btn-lg {
+    padding: 0.75rem 1.5rem;
+  }
+}
+
+/* Утилиты */
+.text-break {
+  word-break: break-word;
+}
+
+.shadow-sm {
+  box-shadow: var(--box-shadow) !important;
+}
+
+/* Дополнительные состояния */
+.alert {
+  border-radius: var(--border-radius);
+  border: none;
+}
+
+.badge {
+  border-radius: var(--border-radius);
+}
+
+/* Скролл */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: var(--border-radius);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: var(--border-radius);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}
+
+#total-counter {
+  transition: transform 0.2s ease-in-out;
+  font-size: 1.1em;
+  margin-left: 8px;
+}

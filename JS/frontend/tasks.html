@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Задачи |  ZAMETOCHKI</title>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="index.html">
+        <i class="bi bi-check2-square"></i>  ZAMETOCHKI
+      </a>
+      
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">
+              <i class="bi bi-house"></i> Главная
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="tasks.html">
+              <i class="bi bi-list-task"></i> Задачи
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">
+              <i class="bi bi-info-circle"></i> О проекте
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-12">
+        <h2 class="mb-4">
+          <i class="bi bi-list-task text-primary"></i>
+          Управление задачами
+        </h2>
+
+        <!-- Статистика -->
+        <div class="row mb-4" id="stats-row">
+          <div class="col-md-4">
+            <div class="card bg-light">
+              <div class="card-body text-center">
+                <h5 class="text-primary">Всего задач</h5>
+                <h3 id="total-count">0</h3>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card bg-light">
+              <div class="card-body text-center">
+                <h5 class="text-success">Выполнено</h5>
+                <h3 id="completed-count">0</h3>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card bg-light">
+              <div class="card-body text-center">
+                <h5 class="text-warning">В процессе</h5>
+                <h3 id="pending-count">0</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Список задач -->
+        <div id="task-list" class="mb-4">
+          <div class="text-center py-4">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Загрузка...</span>
+            </div>
+            <p class="mt-2">Загружаем задачи...</p>
+          </div>
+        </div>
+
+        <div class="card mb-4">
+          <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">
+              <i class="bi bi-plus-circle"></i> Добавить новую задачу
+            </h5>
+          </div>
+          <div class="card-body">
+            <form id="add-form">
+              <div class="mb-3">
+                <label class="form-label" for="new-title">
+                  <i class="bi bi-type"></i> Название задачи *
+                </label>
+                <input id="new-title" 
+                       class="form-control" 
+                       placeholder="Введите название задачи..." 
+                       maxlength="255"
+                       required />
+                <div class="form-text">Обязательное поле (максимум 255 символов)</div>
+              </div>
+              
+              <div class="mb-3">
+                <label class="form-label" for="new-notes">
+                  <i class="bi bi-card-text"></i> Заметки (необязательно)
+                </label>
+                <textarea id="new-notes" 
+                          class="form-control" 
+                          rows="3" 
+                          placeholder="Дополнительная информация к задаче..."></textarea>
+              </div>
+              
+              <button class="btn btn-primary" type="submit">
+                <i class="bi bi-plus-lg"></i> Добавить задачу
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div id="edit-card" class="card d-none mb-4">
+          <div class="card-header bg-warning text-dark">
+            <h5 class="mb-0">
+              <i class="bi bi-pencil-square"></i> Редактировать задачу
+            </h5>
+          </div>
+          <div class="card-body">
+            <form id="edit-form">
+              <input type="hidden" id="edit-id" />
+              
+              <div class="mb-3">
+                <label class="form-label" for="edit-title">
+                  <i class="bi bi-type"></i> Название *
+                </label>
+                <input id="edit-title" 
+                       class="form-control" 
+                       maxlength="255"
+                       required />
+              </div>
+              
+              <div class="mb-3">
+                <label class="form-label" for="edit-notes">
+                  <i class="bi bi-card-text"></i> Заметки
+                </label>
+                <textarea id="edit-notes" 
+                          class="form-control" 
+                          rows="4"></textarea>
+              </div>
+              
+              <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" id="edit-completed" />
+                <label class="form-check-label fw-bold" for="edit-completed">
+                  <i class="bi bi-check-circle"></i> Задача выполнена
+                </label>
+              </div>
+              
+              <div class="d-flex gap-2">
+                <button class="btn btn-success" type="submit">
+                  <i class="bi bi-save"></i> Сохранить изменения
+                </button>
+                <button class="btn btn-secondary" type="button" id="cancel-edit">
+                  <i class="bi bi-x-lg"></i> Отмена
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/tasks.js"></script>
+</body>
+</html>
+<span class="badge bg-primary" id="total-counter">0</span>
